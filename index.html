@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICT Masterclass | HTML & Logic Gate</title>
+
+<style>
+:root {
+ --bg:#f5f7ff;
+ --surface:#fff;
+ --ink:#17213b;
+ --muted:#66718b;
+ --primary:#5b5ce2;
+ --line:#e6e9f4;
+ --soft:#eeefff;
+ --green:#0d9b76;
+ --shadow:0 18px 50px #26336b12;
+}
+
+* {box-sizing:border-box}
+
+html {scroll-behavior:smooth}
+
+body {
+ margin:0;
+ background:var(--bg);
+ color:var(--ink);
+ font-family:system-ui,"Noto Sans Bengali",sans-serif;
+ line-height:1.75;
+}
+
+body.dark {
+ --bg:#101528;
+ --surface:#19213a;
+ --ink:#edf0ff;
+ --muted:#aab3ce;
+ --line:#303a59;
+ --soft:#282e50;
+ --shadow:0 18px 50px #0004;
+}
+
+a {color:inherit;text-decoration:none}
+
+.wrap {
+ width:min(1120px,92%);
+ margin:auto;
+}
+
+header {
+ position:sticky;
+ top:0;
+ z-index:10;
+ background:var(--surface);
+ border-bottom:1px solid var(--line);
+}
+
+.nav {
+ height:72px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:16px;
+}
+
+.brand {
+ font-weight:900;
+ font-size:1.2rem;
+}
+
+.brand span {color:var(--primary)}
+
+.navlinks {
+ display:flex;
+ gap:22px;
+ color:var(--muted);
+}
+
+.navlinks a:hover {color:var(--primary)}
+
+.btn {
+ border:0;
+ border-radius:12px;
+ padding:11px 17px;
+ background:var(--primary);
+ color:white;
+ font-weight:750;
+ cursor:pointer;
+}
+
+.btn.secondary {
+ background:var(--soft);
+ color:var(--primary);
+}
+
+.hero {
+ padding:76px 0 58px;
+ background:
+ radial-gradient(circle at 80% 20%,#9a8cff35,transparent 28%),
+ radial-gradient(circle at 10% 90%,#60d9c329,transparent 28%);
+}
+
+.hero-grid {
+ display:grid;
+ grid-template-columns:1.25fr .75fr;
+ gap:38px;
+ align-items:center;
+}
+
+.eyebrow {
+ display:inline-block;
+ background:var(--soft);
+ color:var(--primary);
+ padding:6px 13px;
+ border-radius:99px;
+ font-size:.85rem;
+ font-weight:800;
+}
+
+h1 {
+ font-size:clamp(2.2rem,5vw,4.1rem);
+ line-height:1.16;
+ margin:18px 0;
+}
+
+h1 span {color:var(--primary)}
+
+.lead {
+ font-size:1.08rem;
+ color:var(--muted);
+}
+
+.hero-actions {
+ display:flex;
+ gap:12px;
+ flex-wrap:wrap;
+ margin-top:25px;
+}
+
+.hero-card {
+ background:var(--surface);
+ padding:25px;
+ border:1px solid var(--line);
+ border-radius:24px;
+ box-shadow:var(--shadow);
+}
+
+.code-window {
+ background:#111a32;
+ color:#e8edff;
+ border-radius:15px;
+ padding:18px;
+ margin-top:12px;
+ font-family:monospace;
+ overflow:auto;
+}
+
+.pink {color:#ff91c8}
+.cyan {color:#83e4ef}
+.yellow {color:#ffe28a}
+
+.stats {
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:12px;
+ margin-top:30px;
+}
+
+.stat {
+ background:var(--surface);
+ border:1px solid var(--line);
+ padding:13px;
+ border-radius:15px;
+}
+
+.stat b {
+ display:block;
+ font-size:1.3rem;
+ color:var(--primary);
+}
+
+.stat small {color:var(--muted)}
+
+section {
+ padding:66px 0;
+ scroll-margin-top:78px;
+}
+
+.section-head {
+ max-width:720px;
+ margin-bottom:28px;
+}
+
+.kicker {
+ color:var(--primary);
+ font-weight:850;
+ font-size:.82rem;
+ letter-spacing:1px;
+}
+
+.section-head h2 {
+ font-size:clamp(1.7rem,3vw,2.5rem);
+ margin:7px 0;
+}
+
+.section-head p {color:var(--muted)}
+
+.grid2 {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:18px;
+}
+
+.card {
+ background:var(--surface);
+ border:1px solid var(--line);
+ border-radius:20px;
+ padding:23px;
+ box-shadow:var(--shadow);
+}
+
+.card p {color:var(--muted)}
+
+.tag {
+ display:inline-block;
+ padding:4px 10px;
+ border-radius:99px;
+ background:var(--soft);
+ color:var(--primary);
+ font-size:.8rem;
+ font-weight:800;
+}
+
+.code {
+ background:#111a32;
+ color:#edf0ff;
+ border-radius:14px;
+ padding:18px;
+ overflow:auto;
+ font: .9rem/1.8 monospace;
+ white-space:pre;
+}
+
+.note {
+ border-left:4px solid var(--green);
+ background:var(--soft);
+ padding:13px 16px;
+ border-radius:0 12px 12px 0;
+ margin-top:15px;
+}
+
+.table-wrap {
+ overflow-x:auto;
+ border:1px solid var(--line);
+ border-radius:15px;
+}
+
+table {
+ border-collapse:collapse;
+ width:100%;
+ background:var(--surface);
+ min-width:440px;
+}
+
+th,td {
+ text-align:center;
+ padding:12px;
+ border-bottom:1px solid var(--line);
+}
+
+th {
+ background:var(--soft);
+ color:var(--primary);
+}
+
+.gates {
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:16px;
+}
+
+.gate-card {
+ background:var(--surface);
+ border:1px solid var(--line);
+ border-radius:18px;
+ padding:18px;
+}
+
+.gate-symbol {
+ height:82px;
+ display:grid;
+ place-items:center;
+ background:var(--soft);
+ border-radius:13px;
+ margin:12px 0;
+}
+
+.gate-symbol svg {
+ width:125px;
+ height:65px;
+}
+
+.gate-card p {color:var(--muted)}
+
+.simulator {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:20px;
+ align-items:center;
+}
+
+.switches {
+ display:flex;
+ gap:14px;
+ flex-wrap:wrap;
+}
+
+.switch {
+ display:flex;
+ align-items:center;
+ gap:8px;
+ background:var(--soft);
+ padding:10px 13px;
+ border-radius:12px;
+}
+
+.switch input {
+ width:19px;
+ height:19px;
+ accent-color:var(--primary);
+}
+
+.result {
+ background:#111a32;
+ color:white;
+ border-radius:18px;
+ padding:24px;
+ text-align:center;
+}
+
+.result strong {
+ display:block;
+ font-size:2.8rem;
+ color:#8fe9d0;
+}
+
+.quiz-q {
+ padding:18px 0;
+ border-bottom:1px solid var(--line);
+}
+
+.quiz-q p {font-weight:800}
+
+.quiz-q label {
+ display:block;
+ padding:7px 10px;
+ color:var(--muted);
+ cursor:pointer;
+}
+
+.quiz-q input {accent-color:var(--primary)}
+
+.feedback {
+ font-weight:800;
+ margin-top:12px;
+}
+
+.progress {
+ height:6px;
+ background:var(--line);
+ border-radius:99px;
+ overflow:hidden;
+}
+
+.progress span {
+ display:block;
+ height:100%;
+ width:0;
+ background:linear-gradient(90deg,var(--primary),#24c7a0);
+ transition:.3s;
+}
+
+footer {
+ padding:35px 0;
+ background:#111a32;
+ color:#dce2ff;
+ text-align:center;
+}
+
+@media(max-width:800px) {
+ .hero-grid,.grid2,.simulator {
+  grid-template-columns:1fr;
+ }
+ .gates {grid-template-columns:repeat(2,1fr)}
+ .navlinks {display:none}
+}
+
+@media(max-width:520px) {
+ .gates {grid-template-columns:1fr}
+ .card {padding:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap nav">
+ <a class="brand" href="#home">
+  ICT <span>MASTERCLASS</span>
+ </a>
+
+ <nav class="navlinks">
+  <a href="#html">HTML</a>
+  <a href="#tags">Tags</a>
+  <a href="#logic">Logic Gate</a>
+  <a href="#simulator">Simulator</a>
+  <a href="#quiz">Quiz</a>
+ </nav>
+
+ <button class="btn secondary" id="themeBtn">
+  ☾ থিম
+ </button>
+</div>
+</header>
+
+<main id="home">
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+<div class="wrap hero-grid">
+
+<div>
+ <span class="eyebrow">
+  ✦ HSC ICT • বাংলা শেখার প্ল্যাটফর্ম
+ </span>
+
+ <h1>
+  ICT শিখি <span>সহজভাবে,</span><br>
+  বুঝে ও প্রয়োগ করে
+ </h1>
+
+ <p class="lead">
+  HTML দিয়ে ওয়েবপেজ তৈরি এবং Logic Gate দিয়ে
+  ডিজিটাল সার্কিটের সিদ্ধান্ত—দুটি গুরুত্বপূর্ণ
+  অধ্যায় শিখুন উদাহরণ, ছক, truth table ও
+  interactive practice-এর মাধ্যমে।
+ </p>
+
+ <div class="hero-actions">
+  <a class="btn" href="#html">শেখা শুরু করি →</a>
+  <a class="btn secondary" href="#quiz">
+   নিজেকে যাচাই করি
+  </a>
+ </div>
+
+ <div class="stats">
+  <div class="stat">
+   <b>HTML</b>
+   <small>ওয়েবের কাঠামো</small>
+  </div>
+  <div class="stat">
+   <b>7 Gates</b>
+   <small>লজিক গেট পরিচিতি</small>
+  </div>
+  <div class="stat">
+   <b>Quiz</b>
+   <small>অনুশীলন</small>
+  </div>
+ </div>
+</div>
+
+<div class="hero-card">
+ <b>একটি HTML পেজের নমুনা</b>
+
+ <div class="code-window">
+  <span class="pink">&lt;!DOCTYPE html&gt;</span><br>
+  <span class="pink">&lt;html&gt;</span><br>
+  &nbsp;&nbsp;<span class="pink">&lt;head&gt;</span><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cyan">&lt;title&gt;</span>My Website<span class="cyan">&lt;/title&gt;</span><br>
+  &nbsp;&nbsp;<span class="pink">&lt;/head&gt;</span><br>
+  &nbsp;&nbsp;<span class="pink">&lt;body&gt;</span><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="yellow">&lt;h1&gt;</span>Hello ICT!<span class="yellow">&lt;/h1&gt;</span><br>
+  &nbsp;&nbsp;<span class="pink">&lt;/body&gt;</span><br>
+  <span class="pink">&lt;/html&gt;</span>
+ </div>
+
+ <p>HTML কোড ব্রাউজারকে ওয়েবপেজের কাঠামো বুঝতে সাহায্য করে।</p>
+</div>
+
+</div>
+</section>
+
+<!-- HTML SECTION -->
+
+<section id="html">
+<div class="wrap">
+
+<div class="section-head">
+ <div class="kicker">PART 01 • WEB DESIGN</div>
+ <h2>HTML কী এবং কেন প্রয়োজন?</h2>
+ <p>
+  HTML-এর পূর্ণরূপ HyperText Markup Language।
+  এটি ওয়েবপেজের কাঠামো তৈরি করার Markup Language;
+  এটি নিজে Programming Language নয়।
+ </p>
+</div>
+
+<div class="grid2">
+
+<article class="card">
+ <span class="tag">মূল ধারণা</span>
+ <h3>HTML কীভাবে কাজ করে?</h3>
+
+ <p>
+  HTML বিভিন্ন tag ব্যবহার করে ব্রাউজারকে জানায়
+  কোনটি heading, paragraph, image, link বা table।
+ </p>
+
+ <div class="note">
+  <b>মনে রাখবে:</b><br>
+  HTML = Structure<br>
+  CSS = Design<br>
+  JavaScript = Behaviour
+ </div>
+</article>
+
+<article class="card">
+ <span class="tag">HTML Document</span>
+ <h3>HTML ফাইলের মৌলিক গঠন</h3>
+
+ <div class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="bn"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;আমার ওয়েবপেজ&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;স্বাগতম&lt;/h1&gt;
+    &lt;p&gt;এটি একটি অনুচ্ছেদ।&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+ </div>
+</article>
+
+</div>
+
+<div class="grid2" style="margin-top:18px">
+
+<article class="card">
+ <h3>HTML-এর গুরুত্বপূর্ণ অংশ</h3>
+ <p><b>&lt;!DOCTYPE html&gt;</b> — HTML5 ঘোষণা করে।</p>
+ <p><b>&lt;html&gt;</b> — পুরো ডকুমেন্টের root element।</p>
+ <p><b>&lt;head&gt;</b> — Metadata ও title রাখে।</p>
+ <p><b>&lt;title&gt;</b> — Browser tab-এর শিরোনাম।</p>
+ <p><b>&lt;body&gt;</b> — দৃশ্যমান মূল কনটেন্ট।</p>
+</article>
+
+<article class="card">
+ <h3>Tag, Element ও Attribute</h3>
+
+ <p><b>Tag:</b> যেমন &lt;p&gt;।</p>
+ <p><b>Element:</b> Opening tag, content ও closing tag।</p>
+ <p><b>Attribute:</b> Element সম্পর্কে অতিরিক্ত তথ্য দেয়।</p>
+
+ <div class="code">
+&lt;a href="https://example.com"&gt;
+  ওয়েবসাইটে যাও
+&lt;/a&gt;
+ </div>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- HTML TAGS -->
+
+<section id="tags">
+<div class="wrap">
+
+<div class="section-head">
+ <div class="kicker">PART 02 • ESSENTIAL TAGS</div>
+ <h2>প্রয়োজনীয় HTML Tag ও ব্যবহার</h2>
+ <p>গুরুত্বপূর্ণ HTML Tag এবং তাদের ব্যবহার।</p>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+ <th>Tag</th>
+ <th>কাজ</th>
+ <th>উদাহরণ</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+ <td>&lt;h1&gt; ... &lt;h6&gt;</td>
+ <td>শিরোনাম তৈরি</td>
+ <td>&lt;h1&gt;Title&lt;/h1&gt;</td>
+</tr>
+<tr>
+ <td>&lt;p&gt;</td>
+ <td>অনুচ্ছেদ তৈরি</td>
+ <td>&lt;p&gt;Text&lt;/p&gt;</td>
+</tr>
+<tr>
+ <td>&lt;br&gt;</td>
+ <td>লাইন বিরতি</td>
+ <td>&lt;br&gt;</td>
+</tr>
+<tr>
+ <td>&lt;hr&gt;</td>
+ <td>বিভাজক রেখা</td>
+ <td>&lt;hr&gt;</td>
+</tr>
+<tr>
+ <td>&lt;a&gt;</td>
+ <td>Hyperlink তৈরি</td>
+ <td>&lt;a href="..."&gt;</td>
+</tr>
+<tr>
+ <td>&lt;img&gt;</td>
+ <td>ছবি যুক্ত করা</td>
+ <td>&lt;img src="a.jpg"&gt;</td>
+</tr>
+<tr>
+ <td>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</td>
+ <td>তালিকা তৈরি</td>
+ <td>Ordered / Unordered List</td>
+</tr>
+<tr>
+ <td>&lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;</td>
+ <td>টেবিল তৈরি</td>
+ <td>Row, Heading, Cell</td>
+</tr>
+<tr>
+ <td>&lt;form&gt;, &lt;input&gt;</td>
+ <td>তথ্য নেওয়া</td>
+ <td>Registration Form</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid2" style="margin-top:18px">
+
+<article class="card">
+ <h3>List-এর উদাহরণ</h3>
+ <div class="code">
+&lt;ol&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+&lt;/ol&gt;
+ </div>
+ <p>ol = Ordered List এবং li = List Item।</p>
+</article>
+
+<article class="card">
+ <h3>Table-এর উদাহরণ</h3>
+ <div class="code">
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;নাম&lt;/th&gt;
+    &lt;th&gt;রোল&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;রাহিম&lt;/td&gt;
+    &lt;td&gt;১&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+ </div>
+ <p>tr = Row, th = Heading, td = Data Cell।</p>
+</article>
+
+</div>
+
+<div class="note">
+ <b>পরীক্ষার টিপস:</b>
+ কোনো tag-এর কাজ লেখার পাশাপাশি একটি code example দিলে উত্তর আরও পরিষ্কার হয়।
+</div>
+
+</div>
+</section>
+
+<!-- LOGIC GATE -->
+
+<section id="logic">
+<div class="wrap">
+
+<div class="section-head">
+ <div class="kicker">PART 03 • DIGITAL ELECTRONICS</div>
+ <h2>Logic Gate: ডিজিটাল যুক্তির ভিত্তি</h2>
+ <p>
+  Logic Gate হলো এমন একটি electronic circuit,
+  যা binary input (0/1) গ্রহণ করে একটি binary output দেয়।
+ </p>
+</div>
+
+<div class="grid2">
+
+<article class="card">
+ <h3>Binary ও Boolean ধারণা</h3>
+ <p><b>0</b> = LOW / False</p>
+ <p><b>1</b> = HIGH / True</p>
+ <p>Boolean algebra-তে চলকের মান 0 অথবা 1 হয়।</p>
+</article>
+
+<article class="card">
+ <h3>Truth Table কী?</h3>
+ <p>
+  Logic Gate-এর সব input combination-এর বিপরীতে
+  output কী হবে, তা যে ছকে দেখানো হয় তাকে Truth Table বলে।
+ </p>
+ <p>nটি input হলে combination = 2<sup>n</sup>।</p>
+</article>
+
+</div>
+
+<div class="gates">
+
+<!-- AND -->
+<article class="gate-card">
+<h3>AND Gate</h3>
+<p>সব input 1 হলে output 1 হয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>B</th><th>Y</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</table>
+</div>
+</article>
+
+<!-- OR -->
+<article class="gate-card">
+<h3>OR Gate</h3>
+<p>যেকোনো একটি input 1 হলেই output 1 হয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>B</th><th>Y</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</table>
+</div>
+</article>
+
+<!-- NOT -->
+<article class="gate-card">
+<h3>NOT Gate</h3>
+<p>একটি input-এর বিপরীত output দেয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>Y</th></tr>
+<tr><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td></tr>
+</table>
+</div>
+</article>
+
+<!-- NAND -->
+<article class="gate-card">
+<h3>NAND Gate</h3>
+<p>AND Gate-এর বিপরীত output দেয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>B</th><th>Y</th></tr>
+<tr><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td></tr>
+</table>
+</div>
+</article>
+
+<!-- NOR -->
+<article class="gate-card">
+<h3>NOR Gate</h3>
+<p>OR Gate-এর বিপরীত output দেয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>B</th><th>Y</th></tr>
+<tr><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>0</td></tr>
+</table>
+</div>
+</article>
+
+<!-- XOR -->
+<article class="gate-card">
+<h3>XOR Gate</h3>
+<p>দুটি input ভিন্ন হলে output 1 হয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>B</th><th>Y</th></tr>
+<tr><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td></tr>
+</table>
+</div>
+</article>
+
+<!-- XNOR -->
+<article class="gate-card">
+<h3>XNOR Gate</h3>
+<p>দুটি input একই হলে output 1 হয়।</p>
+<div class="table-wrap">
+<table>
+<tr><th>A</th><th>B</th><th>Y</th></tr>
+<tr><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>1</td></tr>
+</table>
+</div>
+</article>
+
+</div>
+
+<div class="note">
+ <b>বিশেষ তথ্য:</b>
+ NAND ও NOR-কে Universal Gate বলা হয়।
+ কারণ শুধু NAND অথবা শুধু NOR ব্যবহার করেই
+ অন্যান্য মৌলিক Gate তৈরি করা সম্ভব।
+</div>
+
+</div>
+</section>
+
+<!-- SIMULATOR -->
+
+<section id="simulator">
+<div class="wrap">
+
+<div class="section-head">
+ <div class="kicker">PART 04 • TRY IT YOURSELF</div>
+ <h2>Interactive Logic Gate Simulator</h2>
+ <p>Gate নির্বাচন করে Input পরিবর্তন করো এবং Output দেখো।</p>
+</div>
+
+<div class="card simulator">
+
+<div>
+ <label for="gateSelect">
+  <b>Logic Gate নির্বাচন করুন</b>
+ </label>
+
+ <br>
+
+ <select id="gateSelect">
+  <option>AND</option>
+  <option>OR</option>
+  <option>NOT</option>
+  <option>NAND</option>
+  <option>NOR</option>
+  <option>XOR</option>
+  <option>XNOR</option>
+ </select>
+
+ <div class="switches">
+  <label class="switch">
+   A <input id="inputA" type="checkbox">
+  </label>
+
+  <label class="switch" id="bWrap">
+   B <input id="inputB" type="checkbox">
+  </label>
+ </div>
+
+ <p>টিক দিলে Input = 1, না দিলে Input = 0।</p>
+</div>
+
+<div class="result">
+ <small>OUTPUT (Y)</small>
+ <strong id="output">0</strong>
+ <div id="equation">AND: 0 · 0 = 0</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- QUIZ -->
+
+<section id="quiz">
+<div class="wrap">
+
+<div class="section-head">
+ <div class="kicker">PART 05 • KNOWLEDGE CHECK</div>
+ <h2>নিজেকে যাচাই করো</h2>
+ <p>প্রশ্নগুলোর উত্তর নির্বাচন করে নিজের ফলাফল দেখো।</p>
+</div>
+
+<div class="card">
+
+<div class="progress">
+ <span id="progressBar"></span>
+</div>
+
+<form id="quizForm">
+
+<div class="quiz-q">
+<p>১. HTML-এর পূর্ণরূপ কী?</p>
+<label><input type="radio" name="q1" value="a"> HighText Machine Language</label>
+<label><input type="radio" name="q1" value="b"> HyperText Markup Language</label>
+<label><input type="radio" name="q1" value="c"> Hyper Transfer Main Language</label>
+</div>
+
+<div class="quiz-q">
+<p>২. ওয়েবপেজের দৃশ্যমান মূল কনটেন্ট কোথায় থাকে?</p>
+<label><input type="radio" name="q2" value="a"> Head</label>
+<label><input type="radio" name="q2" value="b"> Title</label>
+<label><input type="radio" name="q2" value="c"> Body</label>
+</div>
+
+<div class="quiz-q">
+<p>৩. AND Gate-এর output 1 হবে কখন?</p>
+<label><input type="radio" name="q3" value="a"> সব input 1 হলে</label>
+<label><input type="radio" name="q3" value="b"> যেকোনো একটি input 1 হলে</label>
+<label><input type="radio" name="q3" value="c"> সব input 0 হলে</label>
+</div>
+
+<div class="quiz-q">
+<p>৪. কোন দুটি Universal Gate?</p>
+<label><input type="radio" name="q4" value="a"> AND ও OR</label>
+<label><input type="radio" name="q4" value="b"> NAND ও NOR</label>
+<label><input type="radio" name="q4" value="c"> XOR ও XNOR</label>
+</div>
+
+<div class="quiz-q">
+<p>৫. XOR Gate-এর output 1 হয় কখন?</p>
+<label><input type="radio" name="q5" value="a"> Input একই হলে</label>
+<label><input type="radio" name="q5" value="b"> Input ভিন্ন হলে</label>
+<label><input type="radio" name="q5" value="c"> সবসময়</label>
+</div>
+
+<button class="btn" type="submit">
+ ফলাফল দেখাও
+</button>
+
+<button class="btn secondary" type="reset" id="resetQuiz">
+ আবার চেষ্টা
+</button>
+
+<div class="feedback" id="feedback"></div>
+
+</form>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+ <b>ICT MASTERCLASS</b>
+ <p>HTML & Logic Gate — Learn • Understand • Practice</p>
+ <p>শিক্ষামূলক প্রজেক্ট | HSC ICT</p>
+</div>
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+// DARK MODE
+
+const themeBtn = document.getElementById('themeBtn');
+
+themeBtn.addEventListener('click', () => {
+ document.body.classList.toggle('dark');
+
+ themeBtn.textContent =
+ document.body.classList.contains('dark')
+ ? '☀ Light'
+ : '☾ থিম';
+});
+
+
+// LOGIC GATE SIMULATOR
+
+const gateSelect = document.getElementById('gateSelect');
+const a = document.getElementById('inputA');
+const b = document.getElementById('inputB');
+const out = document.getElementById('output');
+const eq = document.getElementById('equation');
+const bWrap = document.getElementById('bWrap');
+
+function updateGate() {
+
+ const gate = gateSelect.value;
+ const A = Number(a.checked);
+ const B = Number(b.checked);
+
+ let Y;
+
+ if(gate === 'AND') Y = A & B;
+ if(gate === 'OR') Y = A | B;
+ if(gate === 'NOT') Y = 1 - A;
+
+ if(gate === 'NAND') Y = 1 - (A & B);
+ if(gate === 'NOR') Y = 1 - (A | B);
+
+ if(gate === 'XOR') Y = A ^ B;
+ if(gate === 'XNOR') Y = 1 - (A ^ B);
+
+ bWrap.style.opacity = gate === 'NOT' ? '.35' : '1';
+ b.disabled = gate === 'NOT';
+
+ out.textContent = Y;
+
+ const symbols = {
+  AND:'·',
+  OR:'+',
+  NAND:'↑',
+  NOR:'↓',
+  XOR:'⊕',
+  XNOR:'⊙'
+ };
+
+ eq.textContent =
+ gate === 'NOT'
+ ? `NOT: ¬${A} = ${Y}`
+ : `${gate}: ${A} ${symbols[gate]} ${B} = ${Y}`;
+}
+
+[gateSelect,a,b].forEach(element => {
+ element.addEventListener('change',updateGate);
+});
+
+updateGate();
+
+
+// QUIZ SYSTEM
+
+const form = document.getElementById('quizForm');
+const feedback = document.getElementById('feedback');
+const bar = document.getElementById('progressBar');
+
+form.addEventListener('change', () => {
+
+ const completed = [1,2,3,4,5].filter(i =>
+  form.querySelector(`input[name=q${i}]:checked`)
+ ).length;
+
+ bar.style.width = (completed * 20) + '%';
+});
+
+
+form.addEventListener('submit', event => {
+
+ event.preventDefault();
+
+ const answers = {
+  q1:'b',
+  q2:'c',
+  q3:'a',
+  q4:'b',
+  q5:'b'
+ };
+
+ let score = 0;
+
+ for(const [question,answer] of Object.entries(answers)) {
+
+  const selected =
+  form.querySelector(`input[name=${question}]:checked`);
+
+  if(selected && selected.value === answer) {
+   score++;
+  }
+ }
+
+ feedback.textContent =
+ `তোমার স্কোর: ${score}/5 — ` +
+ (score === 5
+ ? 'অসাধারণ! সব উত্তর সঠিক।'
+ : score >= 3
+ ? 'ভালো চেষ্টা! ভুলগুলো আবার দেখে নাও।'
+ : 'আরেকবার পড়ো, তারপর আবার চেষ্টা করো।');
+
+});
+
+
+// RESET QUIZ
+
+document.getElementById('resetQuiz').addEventListener('click', () => {
+
+ feedback.textContent = '';
+ bar.style.width = '0%';
+
+});
+
+</script>
+
+</body>
+</html>
